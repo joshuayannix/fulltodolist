@@ -15,7 +15,6 @@ let editID = '';
 
 const completeCheck = e => {
   const item = e.target
-  console.log(item)
   if (item.classList[0] === 'title'){
     item.parentElement.classList.toggle('completed')
   }
@@ -81,15 +80,21 @@ const clearItems = () => {
 // delete function
 const deleteItem = e => {
   const element = e.currentTarget.parentElement.parentElement;
+
+  element.classList.add('fall')
   const id = element.dataset.id
-  list.removeChild(element)
   if (list.children.length === 0) {
     container.classList.remove('show-container');
   }
   displayAlert('item removed', 'danger')
+  setTimeout(() => {
+    list.removeChild(element)
+  }, 500)
+
   setBackToDefault();
   // remove from local storage
   removeFromLocalStorage(id);
+
 }
 
 // edit function
